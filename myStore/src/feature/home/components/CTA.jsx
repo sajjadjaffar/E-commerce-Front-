@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function CTA() {
   return (
@@ -14,7 +15,9 @@ function CTA() {
           <p className="text-white text-2xl max-w-2xs">
             Get peak comfy-chic with new winter essentials.
           </p>
-          <button className="bg-white px-8 py-4 w-fit">SHOP NOW</button>
+          <NavLink to="/listing" className="bg-white px-8 py-4 w-fit">
+            SHOP NOW
+          </NavLink>
         </div>
       </div>
     </>

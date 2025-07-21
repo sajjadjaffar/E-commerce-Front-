@@ -1,5 +1,5 @@
 import React from "react";
-
+import { NavLink } from "react-router-dom";
 function Slider1() {
   const Card = [
     {
@@ -37,9 +37,9 @@ function Slider1() {
         <div className="flex flex-row space-x-2 ">
           {Card.map((item) => (
             <div className="" key={item.title}>
-              <div className="">
+              <NavLink to="/listing" className="">
                 <img src={item.imgSrc} className="h-[550px] w-full" />
-              </div>
+              </NavLink>
               <div className="flex flex-col text-start">
                 {" "}
                 <h1 className="text-lg text-gray-800">{item.title}</h1>

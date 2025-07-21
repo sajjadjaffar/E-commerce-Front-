@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function CTA2() {
   return (
@@ -16,7 +17,9 @@ function CTA2() {
           <p className="text-white ">
             Read about our progress in our latest Impact Report.{" "}
           </p>
-          <button className="bg-white px-8 py-4 w-fit">SHOP NOW</button>
+          <NavLink to="/listing" className="bg-white px-8 py-4 w-fit">
+            SHOP NOW
+          </NavLink>{" "}
         </div>
       </div>
     </>

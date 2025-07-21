@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -38,7 +38,7 @@ const NavBar = () => {
               Blog
             </NavLink>
             <NavLink
-              to="contact"
+              to="contactus"
               className={({ isActive }) =>
                 `${isActive ? "text-orange-400" : "text-gray-600"}`
               }
