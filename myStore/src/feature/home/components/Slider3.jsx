@@ -20,7 +20,7 @@ function Slider3() {
   ];
   return (
     <>
-      <div className="flex flex-col gap-10 py-20">
+      <div className="flex flex-col gap-5 md:gap-10 py-10 md:py-20 px-5">
         <div className="flex flex-col gap-2 text-center items-center">
           <h1 className="text-black text-3xl">Everlane On You </h1>
           <p className="text-black ">
@@ -30,9 +30,9 @@ function Slider3() {
           <p>Add Your Photo</p>
         </div>
 
-        <div className="flex flex-row space-x-2 px-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
           {Card.map((item) => (
-            <div className="" key={item.title}>
+            <div className="col-span-1 h-full gap-2" key={item.title}>
               <div className="relative">
                 <img src={item.imgSrc} className="aspect-square object-cover" />
                 <div className="absolute top-2 right-2">

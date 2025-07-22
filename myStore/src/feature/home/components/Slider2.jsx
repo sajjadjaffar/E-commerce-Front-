@@ -3,9 +3,9 @@ import React from "react";
 function Slider2() {
   return (
     <>
-      <div className=" flex flex-col py-20">
-        <div className="flex flex-row">
-          <div className="flex flex-col gap-10 w-1/2 justify-center items-center text-start">
+      <div className="grid grid-cols-1 md:grid-cols-2 justify-center items-center content-center ">
+        <div className="col-span-1 md:order-1 order-2">
+          <div className="flex flex-col gap-10 justify-center items-center text-center lg:text-start">
             <p>People Are Talking</p>
             <img
               src="Frame-1.png"
@@ -18,9 +18,10 @@ function Slider2() {
             </p>
             <p>-- JonSnSF, The Heavyweight Overshirt</p>
           </div>
-          <div>
-            <img src="Slider1.png" alt="" className="h-[650px]" />
-          </div>
+        </div>
+
+        <div className="col-span-1 md:order-2 order-1">
+          <img src="Slider1.png" alt="" className="" />
         </div>
       </div>
     </>

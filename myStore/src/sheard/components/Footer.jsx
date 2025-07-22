@@ -3,8 +3,8 @@ import React from "react";
 function Footer() {
   return (
     <>
-      <div className="bg-gray-300 py-20 px-10">
-        <div className="flex flex-row gap-10 justify-between">
+      <div className="bg-gray-300 p-5 md:py-20 md:px-10">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-2 ">
           <div className="flex flex-col gap-3">
             <p>Acount</p>
             <p>Log In</p>
@@ -35,7 +35,7 @@ function Footer() {
             <p>Affiliates</p>
             <p>Out Stores</p>
           </div>
-          <div className="flex flex-row justify-center items-start h-10">
+          <div className="flex flex-row h-10">
             <input
               placeholder="Enter email"
               className="border-2 border-gray-400 h-full"
@@ -76,7 +76,6 @@ function Footer() {
             </button>
           </div>
         </div>
-        <div></div>
       </div>
     </>
   );

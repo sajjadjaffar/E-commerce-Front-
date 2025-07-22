@@ -11,13 +11,13 @@ function CTA2() {
         }}
       >
         <div className=" flex flex-col gap-3 text-center items-center">
-          <h1 className="text-white text-3xl">
+          <h1 className="text-white text-xl md:text-3xl">
             We’re on a Mission To Clean Up the Industry
           </h1>
-          <p className="text-white ">
+          <p className="text-white text-base md:text-xl ">
             Read about our progress in our latest Impact Report.{" "}
           </p>
-          <NavLink to="/listing" className="bg-white px-8 py-4 w-fit">
+          <NavLink to="/listing" className="bg-white p-2 md:px-8 md:py-4 w-fit">
             SHOP NOW
           </NavLink>{" "}
         </div>

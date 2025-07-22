@@ -29,16 +29,16 @@ function Slider1() {
   ];
   return (
     <>
-      <div className=" flex flex-col gap-3 text-center items-center py-20">
+      <div className=" flex flex-col gap-3 text-center items-center py-20 px-5">
         <h1 className="text-black text-3xl">Everlane Favorites </h1>
         <p className="text-black ">
           Beautifully Functional. Purposefully Designed. Consciously Crafted.{" "}
         </p>
-        <div className="flex flex-row space-x-2 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 ">
           {Card.map((item) => (
-            <div className="" key={item.title}>
+            <div className="col-span-1" key={item.title}>
               <NavLink to="/listing" className="">
-                <img src={item.imgSrc} className="h-[550px] w-full" />
+                <img src={item.imgSrc} className="" />
               </NavLink>
               <div className="flex flex-col text-start">
                 {" "}

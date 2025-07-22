@@ -50,16 +50,16 @@ const Category = () => {
             </NavLink>
           </div>{" "}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 px-10 space-x-3 max-h-[650px] overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-3 px-10 gap-3  overflow-hidden">
           {Card2.map((item) => (
             <div className="col-span-1  " key={item.title}>
-              <div className="relative ">
+              <div className="relative flex justify-center items-center ">
                 <img src={item.imgSrc} />
-                <div className="absolute top-1/2 left-1/3 flex flex-col justify-center items-center">
-                  <h1 className="text-3xl text-white">{item.title}</h1>
+                <div className="absolute flex flex-col justify-center items-center text-center">
+                  <h1 className=" text-3xl text-white">{item.title}</h1>
                   <NavLink
                     to="/listing"
-                    className="text-sm px-4 py-2 bg-white text-black w-fit"
+                    className="text-sm  px-4 py-2 bg-white text-black w-fit"
                   >
                     {item.btnText}
                   </NavLink>
