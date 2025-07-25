@@ -6,6 +6,8 @@ import Footer from "./sheard/components/Footer";
 import Blog from "./page/blog";
 import Listing from "./page/listing";
 import ContactUS from "./page/contactUs";
+import SignUp from "./page/signUp";
+import Login from "./page/login";
 
 function App() {
   // const router = createBrowserRouter([
@@ -40,6 +42,8 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/listing" element={<Listing />} />
           <Route path="/contactus" element={<ContactUS />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
       </BrowserRouter>

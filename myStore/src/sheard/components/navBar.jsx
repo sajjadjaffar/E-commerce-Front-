@@ -50,7 +50,9 @@ const NavBar = () => {
           <div className="text-sm md:text-2xl  text-bold text-gray-700 ">
             Infinity
           </div>
-          <div className="md:px-5">Sign in</div>
+          <NavLink to="/login" className="md:px-5">
+            Login
+          </NavLink>
         </div>
         {/* <div className="flex flex-row justify-center items-center">
           <p className="text-xl text-gray-400  py-2 px-3">New Arrivals</p>
