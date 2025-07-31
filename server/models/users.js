@@ -1,9 +1,28 @@
 const mongoose = require("mongoose");
 
 const urlSchema = new mongoose.Schema({
-  name: {
+  firstName: {
     type: String,
   },
+  lastName: {
+    type: String,
+  },
+  gender: {
+    type: String,
+  },
+  address: {
+    type: String,
+    require: true,
+  },
+  phoneNumber: {
+    type: Number,
+    require: true,
+  },
+  image: {
+    data: Buffer,
+    contentType: String,
+  },
+
   email: {
     type: String,
     require: true,

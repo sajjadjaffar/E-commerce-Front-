@@ -1,9 +1,16 @@
 const usersSchema = require("../models/users");
 const bcrypt = require("bcrypt");
+const { v4: uuidv4 } = require("uuid");
+const { setUser } = require("../service/auth");
 
 async function handleUserCreation(req, res) {
   const data = {
-    name: req.body.name,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    gender: req.body.gender,
+    address: req.body.address,
+    phoneNumber: req.body.phoneNumber,
+    image: req.file ? req.file.filename : null,
     email: req.body.email,
     password: req.body.password,
   };
@@ -29,6 +36,8 @@ async function handleLogin(req, res) {
 
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (isPasswordMatch) {
+      const token = setUser(user);
+      res.cookie("uid", token);
       res.json("success");
     } else {
       res.json("password incorrect");

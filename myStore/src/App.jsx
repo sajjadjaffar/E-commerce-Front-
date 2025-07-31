@@ -8,6 +8,7 @@ import Listing from "./page/listing";
 import ContactUS from "./page/contactUs";
 import SignUp from "./page/signUp";
 import Login from "./page/login";
+import { useState } from "react";
 
 function App() {
   // const router = createBrowserRouter([
@@ -32,10 +33,15 @@ function App() {
   //     ),
   //   },
   // ]);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    () => !!localStorage.getItem("uid")
+  );
+
   return (
     <>
       <BrowserRouter>
-        <NavBar />
+        <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -43,7 +49,12 @@ function App() {
           <Route path="/listing" element={<Listing />} />
           <Route path="/contactus" element={<ContactUS />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={
+              <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            }
+          />
         </Routes>
         <Footer />
       </BrowserRouter>
