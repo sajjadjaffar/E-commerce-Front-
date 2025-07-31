@@ -3,9 +3,7 @@ const userRoute = require("./routes/users");
 const { connectToMongoDb } = require("./connect");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const { restrictToLoggedinUserOnly } = require("./middlewares/auth");
-const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const path = require("path");
 
 const app = express();
 const PORT = 3001;
@@ -21,6 +19,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("", userRoute);
 
 connectToMongoDb("mongodb://localhost:27017/e-commerce").then(() =>

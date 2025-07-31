@@ -64,7 +64,6 @@ function SignUp() {
       if (image) {
         formData.append("image", image);
       }
-      console.log(formData);
 
       axios
         .post("http://localhost:3001/signup", formData)

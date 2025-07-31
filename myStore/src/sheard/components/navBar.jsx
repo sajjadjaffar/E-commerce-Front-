@@ -13,13 +13,15 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
         name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;";
     }
     localStorage.removeItem("uid");
-    window.location.reload;
+    localStorage.removeItem("username");
+    localStorage.removeItem("image");
   };
-
+  const profileImage = localStorage.getItem("image");
+  console.log(profileImage);
   return (
     <>
       <div>
-        <div className="grid grid-cols-3 justify-items-center md:py-4 md:px-5 border-b-2 border-gray-300">
+        <div className="grid grid-cols-3 justify-items-center items-center md:py-4 md:px-5 border-b-2 border-gray-300">
           <div className="grid grid-cols-4 justify-items-center gap-2 text-sm text-center">
             <NavLink
               to="/"
@@ -58,9 +60,17 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
             Infinity
           </div>
           {isLoggedIn ? (
-            <button onClick={handleLogout} className="md:px-5 text-gray-600">
-              Logout
-            </button>
+            <div className="flex flex-row justify-center items-center gap-1">
+              <p className="text-lg text-gray-600">
+                hi! {localStorage.getItem("username")}
+              </p>
+              <div className="w-14 h-14 overflow-hidden rounded-full">
+                <img src={"http://localhost:3001/" + profileImage} alt="" />
+              </div>
+              <button onClick={handleLogout} className="md:px-5 text-gray-600">
+                Logout
+              </button>
+            </div>
           ) : (
             <NavLink to="/login" className="md:px-5 text-gray-600">
               Login

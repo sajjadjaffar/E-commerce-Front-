@@ -1,6 +1,5 @@
 const usersSchema = require("../models/users");
 const bcrypt = require("bcrypt");
-const { v4: uuidv4 } = require("uuid");
 const { setUser } = require("../service/auth");
 
 async function handleUserCreation(req, res) {
@@ -10,10 +9,11 @@ async function handleUserCreation(req, res) {
     gender: req.body.gender,
     address: req.body.address,
     phoneNumber: req.body.phoneNumber,
-    image: req.file ? req.file.filename : null,
+    image: req.file?.path,
     email: req.body.email,
     password: req.body.password,
   };
+  console.log(req.file?.path);
 
   const saltRounds = 1;
   const hashedPassword = await bcrypt.hash(data.password, saltRounds);
@@ -38,7 +38,7 @@ async function handleLogin(req, res) {
     if (isPasswordMatch) {
       const token = setUser(user);
       res.cookie("uid", token);
-      res.json("success");
+      res.json(["success", user.firstName, user.image]);
     } else {
       res.json("password incorrect");
     }

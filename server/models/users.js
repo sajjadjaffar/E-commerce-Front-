@@ -19,8 +19,8 @@ const urlSchema = new mongoose.Schema({
     require: true,
   },
   image: {
-    data: Buffer,
-    contentType: String,
+    type: String,
+    default: "uploads/default.png",
   },
 
   email: {

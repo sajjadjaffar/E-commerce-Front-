@@ -18,10 +18,12 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
         }
       )
       .then((result) => {
-        if (result.data === "success") {
+        console.log(result.data);
+        if (result.data[0] === "success") {
           localStorage.setItem("uid", document.cookie);
-          setIsLoggedIn | true;
-          console.log(isLoggedIn);
+          localStorage.setItem("username", result.data[1]);
+          localStorage.setItem("image", result.data[2]);
+          setIsLoggedIn(true);
           navigate("/");
         } else {
           setErrors(result.data);
