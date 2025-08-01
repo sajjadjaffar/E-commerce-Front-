@@ -22,9 +22,9 @@ function Slider3() {
     <>
       <div className="flex flex-col gap-5 md:gap-10 py-10 md:py-20 px-5">
         <div className="flex flex-col gap-2 text-center items-center">
-          <h1 className="text-black text-3xl">Everlane On You </h1>
+          <h1 className="text-black text-3xl">Infinity On You </h1>
           <p className="text-black ">
-            Share your latest look with #EverlaneOnYou for a chance to be
+            Share your latest look with #InfinityOnYou for a chance to be
             featured.{" "}
           </p>
           <p>Add Your Photo</p>

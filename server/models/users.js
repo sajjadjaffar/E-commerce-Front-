@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
+const { nanoid } = require("nanoid");
 
 const urlSchema = new mongoose.Schema({
+  uniqueId: {
+    type: String,
+    default: () => nanoid(7),
+    index: { unique: true },
+  },
   firstName: {
     type: String,
   },
@@ -10,6 +16,7 @@ const urlSchema = new mongoose.Schema({
   gender: {
     type: String,
   },
+
   address: {
     type: String,
     require: true,

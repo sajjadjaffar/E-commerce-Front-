@@ -68,7 +68,7 @@ function SignUp() {
       axios
         .post("http://localhost:3001/signup", formData)
         .then((result) => {
-          console.log(result);
+          // console.log(result);
           navigate("/login");
         })
         .catch((err) => console.log(err));

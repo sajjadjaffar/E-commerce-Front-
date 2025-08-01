@@ -1,5 +1,10 @@
 const express = require("express");
-const { handleUserCreation, handleLogin } = require("../controllers/users");
+const {
+  handleUserCreation,
+  handleLogin,
+  handleUserupdate,
+  handleGetInfo,
+} = require("../controllers/users");
 const multer = require("multer");
 
 const router = express.Router();
@@ -15,6 +20,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.post("/signup", upload.single("image"), handleUserCreation);
+router.post("/update", upload.single("image"), handleUserupdate);
 router.post("/login", handleLogin);
+router.get("/getinfo", upload.single("image"), handleGetInfo);
 
 module.exports = router;

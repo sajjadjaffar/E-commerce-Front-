@@ -30,7 +30,7 @@ function Slider1() {
   return (
     <>
       <div className=" flex flex-col gap-3 text-center items-center py-20 px-5">
-        <h1 className="text-black text-3xl">Everlane Favorites </h1>
+        <h1 className="text-black text-3xl">Infinity Favorites </h1>
         <p className="text-black ">
           Beautifully Functional. Purposefully Designed. Consciously Crafted.{" "}
         </p>

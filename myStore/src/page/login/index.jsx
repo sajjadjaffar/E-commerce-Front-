@@ -2,9 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-function Login({ isLoggedIn, setIsLoggedIn }) {
+function Login({ isLoggedIn, setIsLoggedIn, setNameD, setImageD }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
   const [errors, setErrors] = useState("");
   const navigate = useNavigate();
   const handleSubmit = (e) => {
@@ -20,9 +21,9 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
       .then((result) => {
         console.log(result.data);
         if (result.data[0] === "success") {
-          localStorage.setItem("uid", document.cookie);
-          localStorage.setItem("username", result.data[1]);
-          localStorage.setItem("image", result.data[2]);
+          localStorage.setItem("uniqueId", result.data[1]);
+          localStorage.setItem("name", result.data[2]);
+          localStorage.setItem("image", result.data[3]);
           setIsLoggedIn(true);
           navigate("/");
         } else {

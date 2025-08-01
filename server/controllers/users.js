@@ -13,9 +13,8 @@ async function handleUserCreation(req, res) {
     email: req.body.email,
     password: req.body.password,
   };
-  console.log(req.file?.path);
 
-  const saltRounds = 1;
+  const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(data.password, saltRounds);
   data.password = hashedPassword;
 
@@ -24,7 +23,40 @@ async function handleUserCreation(req, res) {
     .then((users) => res.json(users))
     .catch((err) => res.json(err));
 }
+async function handleUserupdate(req, res) {
+  try {
+    const { uniqueId } = req.body;
 
+    const newUser = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      gender: req.body.gender,
+      address: req.body.address,
+      phoneNumber: req.body.phoneNumber,
+      image: req.file?.path || req.body.image,
+      email: req.body.email,
+      password: req.body.password,
+    };
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(newUser.password, saltRounds);
+    newUser.password = hashedPassword;
+
+    const updatedUser = await usersSchema.findOneAndUpdate(
+      { uniqueId: uniqueId },
+      { $set: newUser },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "An error occurred during user update" });
+  }
+}
 async function handleLogin(req, res) {
   try {
     const { email, password } = req.body;
@@ -38,7 +70,7 @@ async function handleLogin(req, res) {
     if (isPasswordMatch) {
       const token = setUser(user);
       res.cookie("uid", token);
-      res.json(["success", user.firstName, user.image]);
+      res.json(["success", user.uniqueId, user.firstName, user.image]);
     } else {
       res.json("password incorrect");
     }
@@ -47,7 +79,28 @@ async function handleLogin(req, res) {
   }
 }
 
+async function handleGetInfo(req, res) {
+  // const { uniqueId } = req.body;
+  const email = "fahad@gmail.com";
+  const user = await usersSchema.findOne({ email: email });
+  console.log(user);
+  res.json([
+    "success",
+    user.firstName,
+    user.lastName,
+    user.gender,
+    user.address,
+    user.password,
+    user.email,
+    user.phoneNumber,
+    user.image,
+    user.uniqueId,
+  ]);
+}
+
 module.exports = {
   handleUserCreation,
   handleLogin,
+  handleUserupdate,
+  handleGetInfo,
 };

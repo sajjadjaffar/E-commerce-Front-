@@ -38,7 +38,7 @@ function NewArticles() {
       <div className="py-10">
         <div className="border-8 border-black  "></div>
         <div className="flex flex-col max-w-[600px]">
-          <h1 className="text-5xl md:text-9xl">everworld</h1>
+          <h1 className="text-5xl md:text-9xl">Infinityworld</h1>
           <p className="text-base md:text-2xl">
             We’re on a mission to clean up a dirty industry. These are the
             people, stories, and ideas that will help us get there.
