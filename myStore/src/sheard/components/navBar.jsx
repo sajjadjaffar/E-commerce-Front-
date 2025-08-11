@@ -27,6 +27,8 @@ const NavBar = ({
     localStorage.removeItem("admin");
     localStorage.removeItem("editUserId");
     localStorage.removeItem("editItemId");
+    localStorage.removeItem("image-");
+    localStorage.removeItem("name-");
     setAdmin(false);
   };
   const profileImage = localStorage.getItem("image");

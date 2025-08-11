@@ -72,31 +72,10 @@ function StockEditPage({ password, email }) {
               <form
                 encType="multipart/form-data"
                 onSubmit={handleSubmit}
-                className="flex flex-col text-sm relative gap-14"
+                className="flex flex-col text-sm relative gap-5"
               >
-                {/* <div className="flex md:flex-row flex-col items-center gap-3">
-                  <img
-                    src={previewImage || null}
-                    height={150}
-                    width={150}
-                    alt="Profile"
-                  />
-                  <input
-                    type="file"
-                    name="image"
-                    accept="image/*"
-                    className="border-[1px] rounded-sm p-2 bg-gray-300 font-medium max-w-[200px]"
-                    onChange={(e) => {
-                      const file = e.target.files[0];
-                      setImage(file);
-                      if (file) {
-                        setPreviewImage(URL.createObjectURL(file));
-                      }
-                    }}
-                  />
-                </div> */}
                 <div className="flex gap-2">
-                  <div>
+                  <div className="flex flex-col gap-2">
                     {" "}
                     <img
                       src={previewImage1 || null}
@@ -116,7 +95,7 @@ function StockEditPage({ password, email }) {
                       }}
                     />
                   </div>{" "}
-                  <div>
+                  <div className="flex flex-col gap-2">
                     {" "}
                     <img
                       src={previewImage2 || null}
@@ -135,7 +114,7 @@ function StockEditPage({ password, email }) {
                       }}
                     />
                   </div>{" "}
-                  <div>
+                  <div className="flex flex-col gap-2">
                     {" "}
                     <img
                       src={previewImage3 || null}
@@ -212,17 +191,17 @@ function StockEditPage({ password, email }) {
                     >
                       Save
                     </button>{" "}
-                    <button
-                      onClick={() => {
-                        navigate("/listing");
-                      }}
-                      className="bg-linear-to-r from-gray-400 to-gray-200 border-[1px] py-2 px-4 rounded-2xl w-fit min-w-[150px]"
-                    >
-                      Cancel
-                    </button>
                   </div>
                 </div>
               </form>
+              <button
+                onClick={() => {
+                  navigate("/listing");
+                }}
+                className="bg-linear-to-r from-gray-400 to-gray-200 border-[1px] py-2 px-4 rounded-2xl w-fit min-w-[150px]"
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>

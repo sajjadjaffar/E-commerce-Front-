@@ -297,6 +297,14 @@ function EditUser({ password, email }) {
                       className="bg-linear-to-r from-gray-400 to-gray-200 border-[1px] py-2 px-4 rounded-2xl w-fit min-w-[150px]"
                     >
                       Delete
+                    </button>{" "}
+                    <button
+                      onClick={() => {
+                        navigate("users");
+                      }}
+                      className="bg-linear-to-r from-gray-400 to-gray-200 border-[1px] py-2 px-4 rounded-2xl w-fit min-w-[150px]"
+                    >
+                      Cancel
                     </button>
                   </div>
                 )}

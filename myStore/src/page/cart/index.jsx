@@ -43,11 +43,13 @@ function Cart({ setTotalCartItem }) {
 
   const decreaseQuantity = (uniqueId) => {
     setCart((prevCart) => {
-      const updatedCart = prevCart.map((item) =>
-        item.uniqueId === uniqueId
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      );
+      const updatedCart = prevCart.map((item) => {
+        if (item.uniqueId === uniqueId) {
+          const newQuantity = item.quantity > 1 ? item.quantity - 1 : 1; // 🔐 Prevent going below 1
+          return { ...item, quantity: newQuantity };
+        }
+        return item;
+      });
 
       const totalQuantity = updatedCart.reduce(
         (acc, item) => acc + item.quantity,

@@ -170,30 +170,36 @@ async function handleGetItemInfo(req, res) {
 async function handleItemupdate(req, res) {
   try {
     const { uniqueId, itemName, quantity, price, colors } = req.body;
-    const imagePaths = req.files.map((file) => file.path);
 
     if (!uniqueId) {
       return res.status(400).json({ message: "uniqueId is required" });
     }
+
     const colorsArray = colors.split(",").map((color) => color.trim());
 
-    const newItem = {
+    const existingItem = await ItemsSchema.findOne({ uniqueId });
+
+    if (!existingItem) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    const updatedFields = {
       itemName,
       quantity,
       price,
       colors: colorsArray,
-      image: imagePaths,
     };
+
+    if (req.files && req.files.length > 0) {
+      const imagePaths = req.files.map((file) => file.path);
+      updatedFields.image = imagePaths;
+    }
 
     const updatedItem = await ItemsSchema.findOneAndUpdate(
       { uniqueId },
-      { $set: newItem },
+      { $set: updatedFields },
       { new: true }
     );
-
-    if (!updatedItem) {
-      return res.status(404).json({ message: "Item not found" });
-    }
 
     res
       .status(200)

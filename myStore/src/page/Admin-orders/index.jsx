@@ -50,35 +50,26 @@ function OrdersPage() {
 
   return (
     <div>
+      {orders.length === 0 ? (
+        <div>
+          <p>No Orders</p>
+        </div>
+      ) : null}
+
       {orders.map((order) => (
-        <div
-          key={order._id}
-          style={{ border: "1px solid black", margin: "10px", padding: "10px" }}
-        >
+        <div key={order._id} className="border-[1px] p-3 m-3">
           <h3>Order ID: {order.OrderId}</h3>
-
-          <label>Status: </label>
-          <select
-            value={editedStatuses[order._id] || order.OrderStatus}
-            onChange={(e) => handleStatusChange(order._id, e.target.value)}
-          >
-            <option value="pending">Pending</option>
-            <option value="cancel">Cancel</option>
-            <option value="accepted">Accepted</option>
-            <option value="delivered">Delivered</option>
-          </select>
-
-          <button
-            onClick={() => handleSaveStatus(order._id)}
-            style={{ marginLeft: "10px" }}
-          >
-            Save
-          </button>
+          <div className="border-b-[1px] border-gray-500 "></div>
 
           <p>Created At: {new Date(order.createdAt).toLocaleString()}</p>
+          <div className="border-b-[1px] border-gray-500 "></div>
+
           <p>User ID: {order.userId}</p>
+          <div className="border-b-[1px] border-gray-500 "></div>
 
           <h4>Items:</h4>
+          <div className="border-b-[1px] border-gray-500 "></div>
+
           <ul>
             {order.OrderDetail.map((item) => (
               <li key={item._id}>
@@ -87,6 +78,26 @@ function OrdersPage() {
               </li>
             ))}
           </ul>
+          <div className="flex gap-2 justify-end items-center">
+            {" "}
+            <label>Status: </label>
+            <select
+              value={editedStatuses[order._id] || order.OrderStatus}
+              onChange={(e) => handleStatusChange(order._id, e.target.value)}
+              className="border-[1px] py-2 px-4 rounded-lg w-fit min-w-[150px] flex justify-center items-center"
+            >
+              <option value="pending">Pending</option>
+              <option value="cancel">Cancel</option>
+              <option value="accepted">Accepted</option>
+              <option value="delivered">Delivered</option>
+            </select>
+            <button
+              onClick={() => handleSaveStatus(order._id)}
+              className="bg-linear-to-r from-gray-400 to-gray-200 border-[1px] py-2 px-4 rounded-2xl w-fit min-w-[150px]"
+            >
+              Save
+            </button>
+          </div>
         </div>
       ))}
     </div>
