@@ -10,6 +10,11 @@ const urlSchema = new mongoose.Schema({
   firstName: {
     type: String,
   },
+  role: {
+    type: String,
+    enum: ["USER", "ADMIN"],
+    default: "USER",
+  },
   lastName: {
     type: String,
   },
@@ -37,7 +42,7 @@ const urlSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    require: true,
+    // require: true,
   },
   //   visitHistory: [
   //     {

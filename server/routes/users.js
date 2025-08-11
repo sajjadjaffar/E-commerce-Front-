@@ -4,6 +4,11 @@ const {
   handleLogin,
   handleUserupdate,
   handleGetInfo,
+  handleUserData,
+  handleDelete,
+  handleGetItems,
+  handleAddItems,
+  handleDeleteItem,
 } = require("../controllers/users");
 const multer = require("multer");
 
@@ -19,9 +24,17 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+//users route
 router.post("/signup", upload.single("image"), handleUserCreation);
-router.post("/update", upload.single("image"), handleUserupdate);
+router.patch("/update", upload.single("image"), handleUserupdate);
 router.post("/login", handleLogin);
-router.get("/getinfo", upload.single("image"), handleGetInfo);
+router.post("/getinfo", upload.single("image"), handleGetInfo);
+router.get("/userdata", handleUserData);
+router.post("/delete", handleDelete);
+
+//items route
+router.post("/deleteitem", handleDeleteItem);
+router.get("/getitems", handleGetItems);
+router.post("/additems", upload.array("images", 10), handleAddItems);
 
 module.exports = router;
