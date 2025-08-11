@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-function Login({ isLoggedIn, setIsLoggedIn, setNameD, setImageD }) {
+function Login({ setIsLoggedIn, setAdmin }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -19,11 +19,16 @@ function Login({ isLoggedIn, setIsLoggedIn, setNameD, setImageD }) {
         }
       )
       .then((result) => {
-        console.log(result.data);
         if (result.data[0] === "success") {
           localStorage.setItem("uniqueId", result.data[1]);
           localStorage.setItem("name", result.data[2]);
           localStorage.setItem("image", result.data[3]);
+          if (result.data[4] === "ADMIN") {
+            setAdmin(true);
+            localStorage.setItem("admin", true);
+          } else {
+            localStorage.setItem("admin", false);
+          }
           setIsLoggedIn(true);
           navigate("/");
         } else {

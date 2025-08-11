@@ -13,7 +13,10 @@ function CTA() {
               <p className="text-white md:text-2xl max-w-2xs">
                 Get peak comfy-chic with new winter essentials.
               </p>
-              <NavLink to="/listing" className="bg-white md:px-8 md:py-4 w-fit">
+              <NavLink
+                to="/listing"
+                className="bg-white md:px-8 md:py-4 w-fi  hover:text-orange-400"
+              >
                 SHOP NOW
               </NavLink>
             </div>

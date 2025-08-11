@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
 
 function SignUp() {
   const [firstName, setFirstName] = useState();
@@ -68,7 +67,6 @@ function SignUp() {
       axios
         .post("http://localhost:3001/signup", formData)
         .then((result) => {
-          // console.log(result);
           navigate("/login");
         })
         .catch((err) => console.log(err));

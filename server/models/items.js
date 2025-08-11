@@ -19,7 +19,11 @@ const itemSchema = new mongoose.Schema({
   },
   image: {
     type: [String],
-    default: ["uploads/default.png"],
+    default: [
+      "uploads/default.png",
+      "uploads/default.png",
+      "uploads/default.png",
+    ],
   },
   colors: {
     type: [String],

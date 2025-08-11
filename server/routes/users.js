@@ -9,17 +9,28 @@ const {
   handleGetItems,
   handleAddItems,
   handleDeleteItem,
+  handleGetItemInfo,
+  handleItemupdate,
+  handleOrder,
+  handleCart,
+  handleCartInfo,
+  handlequantityupdate,
+  handleDeleteCart,
+  handleUsersOrders,
+  handleOrdersStatus,
+  handleShowOrderStatus,
 } = require("../controllers/users");
+
 const multer = require("multer");
 
 const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/"); // Store files in the 'uploads' directory
+    cb(null, "uploads/");
   },
   filename: function (req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`); // Unique filename
+    cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
 const upload = multer({ storage });
@@ -36,5 +47,18 @@ router.post("/delete", handleDelete);
 router.post("/deleteitem", handleDeleteItem);
 router.get("/getitems", handleGetItems);
 router.post("/additems", upload.array("images", 10), handleAddItems);
+router.post("/getiteminfo", upload.single("image"), handleGetItemInfo);
+router.patch("/updateitem", upload.array("images", 10), handleItemupdate);
+
+//order route
+router.post("/order", handleOrder);
+router.post("/cart", handleCart);
+router.post("/cartinfo", handleCartInfo);
+router.post("/update-cart-quantity", handlequantityupdate);
+router.post("/emptycart", handleDeleteCart);
+router.get("/orders", handleUsersOrders);
+router.put("/orders/:id", handleOrdersStatus);
+router.put("/orders/:id", handleOrdersStatus);
+router.get("/orders/user/:userId", handleShowOrderStatus);
 
 module.exports = router;

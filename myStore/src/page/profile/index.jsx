@@ -12,44 +12,45 @@ function ProfilePage({ password, email, isLoggedIn }) {
   const [phoneNumber_, setPhoneNumber] = useState("");
   const [image_, setImage] = useState("");
   const [email_, setEmail] = useState("");
-  const [password_, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [previewImage, setPreviewImage] = useState("");
 
   const uniqueId = localStorage.getItem("uniqueId");
-  if (isLoggedIn) {
-    useEffect(() => {
+  useEffect(() => {
+    if (isLoggedIn) {
       axios
-        .get("http://localhost:3001/getinfo", {
-          params: { email, password },
-          withCredentials: true,
-        })
-
+        .post(
+          "http://localhost:3001/getinfo",
+          {
+            email,
+            password,
+            uniqueId,
+          },
+          {
+            withCredentials: true,
+          }
+        )
         .then((result) => {
           if (result.data[0] === "success") {
             setFirstName(result.data[1]);
             setLastName(result.data[2]);
             setGender(result.data[3]);
             setAddress(result.data[4]);
-            // setPassword(result.data[5]);
-            setEmail(result.data[6]);
-            setPhoneNumber(result.data[7]);
-            setImage(result.data[8]);
+            setEmail(result.data[5]);
+            setPhoneNumber(result.data[6]);
+            setImage(result.data[7]);
 
-            // localStorage.setItem("uniqueId", result.data[9]);
+            if (typeof result.data[8] === "string") {
+              setPreviewImage("http://localhost:3001/" + result.data[7]);
+            }
           } else {
             setErrors(result.data);
             navigate("/login");
           }
         })
         .catch((err) => console.log(err));
-    }, []);
-    useEffect(() => {
-      if (typeof image_ === "string") {
-        setPreviewImage("http://localhost:3001/" + image_);
-      }
-    }, [image_]);
-  }
+    }
+  }, [email, password, navigate]);
 
   const validateForm = () => {
     const newErrors = {};
@@ -74,9 +75,9 @@ function ProfilePage({ password, email, isLoggedIn }) {
     } else if (!/\S+@\S+\.\S+/.test(email_)) {
       newErrors.email = "Invalid email format";
     }
-    if (!password_ || password_.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
-    }
+    // if (!password_ || password_.length < 6) {
+    //   newErrors.password = "Password must be at least 6 characters";
+    // }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -94,20 +95,22 @@ function ProfilePage({ password, email, isLoggedIn }) {
       formData.append("phoneNumber", phoneNumber_);
       formData.append("email", email_);
       formData.append("uniqueId", uniqueId);
-      formData.append("password", password_);
       if (image_ && typeof image_ !== "string") {
         formData.append("image", image_);
       }
 
       axios
-        .post("http://localhost:3001/update", formData)
+        .patch("http://localhost:3001/update", formData)
         .then((result) => {
+          const { imagePath, name } = result.data;
+          localStorage.setItem("name", name);
+          if (imagePath) {
+            localStorage.setItem("image", `${imagePath}`);
+          }
+
           navigate("/profilepage");
         })
         .catch((err) => console.log(err));
-
-      const Name = first_Name;
-      localStorage.setItem("name", Name);
 
       if (typeof image_ === "string") {
         localStorage.setItem("image", image_);
@@ -134,7 +137,7 @@ function ProfilePage({ password, email, isLoggedIn }) {
                   encType="multipart/form-data"
                   className="flex flex-col gap-2 text-sm"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex md:flex-row flex-col items-center gap-3">
                     <img
                       src={previewImage || null}
                       height={150}
@@ -145,12 +148,14 @@ function ProfilePage({ password, email, isLoggedIn }) {
                       type="file"
                       name="image"
                       accept="image/*"
-                      className="border-[1px] rounded-sm p-2 bg-gray-300 font-medium"
+                      className="border-[1px] rounded-sm p-2 bg-gray-300 font-medium max-w-[200px]"
                       onChange={(e) => {
                         const file = e.target.files[0];
                         setImage(file);
+
                         if (file) {
                           setPreviewImage(URL.createObjectURL(file));
+                          console.log(image_);
                         }
                       }}
                     />
@@ -246,19 +251,6 @@ function ProfilePage({ password, email, isLoggedIn }) {
                       required
                       autoComplete="off"
                       onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </label>
-
-                  <label className="flex flex-col gap-1">
-                    Password
-                    <input
-                      className="bg-gray-100 py-2 rounded-lg px-1"
-                      type="password"
-                      name="password"
-                      // value={password_}
-                      required
-                      autoComplete="off"
-                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </label>
 
